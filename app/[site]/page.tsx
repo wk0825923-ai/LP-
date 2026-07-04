@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Script from "next/script";
 import { Noto_Sans_JP } from "next/font/google";
-import { getSite, getSiteSlugs } from "@/lib/sites";
+import { getServedContent } from "@/lib/sites";
 import { SectionRenderer, StickyCta } from "@/components/sections";
 import "./lp.css";
 
@@ -11,9 +11,8 @@ const notoSansJp = Noto_Sans_JP({
   weight: ["400", "500", "700", "900"],
 });
 
-export function generateStaticParams() {
-  return getSiteSlugs().map((site) => ({ site }));
-}
+// 承認された改善を即反映するため、リクエスト毎にDBの公開バージョンを解決する(スコープ3)
+export const dynamic = "force-dynamic";
 
 export async function generateMetadata({
   params,
@@ -21,7 +20,7 @@ export async function generateMetadata({
   params: Promise<{ site: string }>;
 }): Promise<Metadata> {
   const { site } = await params;
-  const content = getSite(site);
+  const content = await getServedContent(site);
   if (!content) return {};
   return {
     title: content.meta.title,
@@ -35,7 +34,7 @@ export default async function LpPage({
   params: Promise<{ site: string }>;
 }) {
   const { site } = await params;
-  const content = getSite(site);
+  const content = await getServedContent(site);
   if (!content) notFound();
 
   return (
