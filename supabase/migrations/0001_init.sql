@@ -1,5 +1,5 @@
--- LP秘書 イベント基盤 初期スキーマ
--- 適用先は専用のSupabaseプロジェクト(無料枠)を想定。既存プロジェクト(SR Assist等)には適用しないこと。
+-- LP秘書 イベント基盤 初期スキーマ(LP秘書専用プロジェクトに適用する)
+-- SupabaseダッシュボードのSQL Editorにそのまま貼って実行すればセットアップ完了。
 
 create table if not exists sites (
   id uuid primary key default gen_random_uuid(),
@@ -34,6 +34,16 @@ create index if not exists events_site_created_idx on events (site_slug, created
 create index if not exists events_site_type_idx on events (site_slug, type);
 create index if not exists events_site_session_idx on events (site_slug, session_id);
 
--- 書き込みはservice roleのみ(API Route経由)。anonからのアクセスは全面拒否
 alter table sites enable row level security;
 alter table events enable row level security;
+
+-- 書き込みはAPI Route(サーバ)経由。anonキーでもinsertだけ通し、読み取りは一切許可しない
+drop policy if exists lph_events_insert on events;
+create policy lph_events_insert on events
+  for insert to anon, authenticated
+  with check (true);
+
+-- 初期データ: デモサイト(Loku経路「LP」= 01kr15470zxg)
+insert into sites (slug, name, loku_channel_id)
+values ('studio-lien', 'Studio Lien', '01kr15470zxg')
+on conflict (slug) do update set loku_channel_id = excluded.loku_channel_id;
