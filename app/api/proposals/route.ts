@@ -51,11 +51,23 @@ export async function POST(req: Request) {
       return Response.json({ error: "Supabase未設定" }, { status: 500 });
     }
 
+    // 却下済みドラフトが同じバージョン番号を占有している場合があるため、
+    // 既存の最大バージョン+1まで繰り上げる(unique制約違反の回避)
+    const { data: maxRow } = await supabase
+      .from("site_versions")
+      .select("version")
+      .eq("site_slug", site)
+      .order("version", { ascending: false })
+      .limit(1)
+      .maybeSingle();
+    const nextVersion = Math.max(proposal.nextVersion, (maxRow?.version ?? 0) + 1);
+    proposal.nextContent.version = nextVersion;
+
     const id = crypto.randomUUID();
     const { error } = await supabase.from("site_versions").insert({
       id,
       site_slug: site,
-      version: proposal.nextVersion,
+      version: nextVersion,
       content: proposal.nextContent,
       proposal_md: proposal.proposalMd,
       changes: proposal.changes,
