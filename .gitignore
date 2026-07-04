@@ -42,3 +42,5 @@ next-env.d.ts
 
 # LP秘書: ローカル計測データ
 .data/
+.vercel
+.env*

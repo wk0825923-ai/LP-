@@ -3,6 +3,7 @@
 
 import Anthropic from "@anthropic-ai/sdk";
 import type { SiteStats } from "./stats";
+import { env } from "./env";
 
 export interface GeneratedReport {
   summaryText: string;
@@ -50,9 +51,10 @@ function ruleBasedInsights(s: SiteStats): string[] {
 }
 
 async function llmInsights(s: SiteStats): Promise<string[] | null> {
-  if (!process.env.ANTHROPIC_API_KEY) return null;
+  const apiKey = env("ANTHROPIC_API_KEY");
+  if (!apiKey) return null;
   try {
-    const client = new Anthropic();
+    const client = new Anthropic({ apiKey });
     const response = await client.messages.create({
       model: "claude-sonnet-4-6",
       max_tokens: 2000,

@@ -9,11 +9,12 @@ import { getSite } from "@/lib/sites";
 import { computeStats } from "@/lib/stats";
 import { generateReport } from "@/lib/report";
 import { sendLineText } from "@/lib/loku";
+import { env } from "@/lib/env";
 
 export const runtime = "nodejs";
 
 export async function POST(req: Request) {
-  const adminKey = process.env.ADMIN_KEY;
+  const adminKey = env("ADMIN_KEY");
   if (!adminKey || req.headers.get("x-admin-key") !== adminKey) {
     return Response.json({ error: "unauthorized" }, { status: 401 });
   }
@@ -37,7 +38,7 @@ export async function POST(req: Request) {
 
     // レポートIDは先に確定させ、サマリー本文に詳細ビューURLを埋め込む
     const id = crypto.randomUUID();
-    const origin = process.env.PUBLIC_ORIGIN ?? new URL(req.url).origin;
+    const origin = env("PUBLIC_ORIGIN") ?? new URL(req.url).origin;
     const reportUrl = body.dryRun ? undefined : `${origin}/reports/${id}`;
 
     const report = await generateReport(stats, content.name, reportUrl);
