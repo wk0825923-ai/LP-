@@ -69,6 +69,10 @@ export default async function ApprovePage({
           </section>
         ))}
 
+        <a className="preview-link" href={`/preview/${draft.id}`} target="_blank">
+          変更後のページを実際に見てみる →
+        </a>
+
         {draft.status === "draft" ? (
           <div className="actions">
             <form method="post" action="/api/approve">
