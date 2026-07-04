@@ -1,0 +1,77 @@
+/* LP秘書 レポート詳細ビュー — 数字は素のゴシック太字、装飾フォント禁止 */
+
+.lph-report {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 32px 20px 64px;
+  color: #1a1a1a;
+  background: #fff;
+  line-height: 1.8;
+}
+
+.lph-report h1 {
+  font-size: 1.5rem;
+  font-weight: 900;
+  margin: 0 0 8px;
+  padding-bottom: 12px;
+  border-bottom: 3px solid #1a1a1a;
+}
+
+.lph-report h2 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin: 40px 0 12px;
+  padding-left: 10px;
+  border-left: 4px solid #1a1a1a;
+}
+
+.lph-report p {
+  margin: 8px 0;
+  color: #444;
+  font-size: 0.95rem;
+}
+
+.lph-report ul {
+  margin: 8px 0;
+  padding-left: 22px;
+}
+
+.lph-report li {
+  margin: 6px 0;
+  font-size: 0.95rem;
+}
+
+.lph-report table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 12px 0;
+  font-size: 0.95rem;
+}
+
+.lph-report th {
+  text-align: left;
+  font-weight: 500;
+  color: #666;
+  padding: 8px 12px;
+  border-bottom: 2px solid #ddd;
+  background: #fafafa;
+}
+
+.lph-report td {
+  padding: 10px 12px;
+  border-bottom: 1px solid #eee;
+}
+
+/* 値のセル(2列目以降)は数字を太字ゴシックで */
+.lph-report td:not(:first-child) {
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.lph-report footer {
+  margin-top: 56px;
+  padding-top: 16px;
+  border-top: 1px solid #eee;
+  color: #999;
+  font-size: 0.8rem;
+}
