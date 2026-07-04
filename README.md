@@ -1,36 +1,30 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# LP秘書 — app
 
-## Getting Started
+LPホスティング+計測+イベント基盤(MVPスコープ1)。事業計画は `../business-plan.md`。
 
-First, run the development server:
+## 構成
 
-```bash
+- `content/sites/*.json` — LPは構造化JSON+テンプレートで保持(HTML直編集させない)。`version` を上げて前後比較する
+- `app/[site]/page.tsx` + `components/sections.tsx` — JSONからLPをレンダリング
+- `public/t.js` — 自前計測スクリプト(pageview / scroll / section_view / section_dwell / cta_click)。タグ版(Light)は `data-endpoint` 指定で他ドメインでも動く
+- `app/api/track/route.ts` — イベント収集(CORS開放、sendBeacon対応)。Supabase未設定時は `.data/events.ndjson` に追記(ローカル開発)
+- `supabase/migrations/0001_init.sql` — sites / events テーブル
+
+## ローカル起動
+
+```
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+# http://localhost:3000/studio-lien
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+計測イベントは `.data/events.ndjson` に落ちる(Supabase未設定時)。
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 本番(すべて無料枠)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+1. Supabase無料枠で新規プロジェクト作成 → SQL Editorで `supabase/migrations/0001_init.sql` を実行(既存の本番プロジェクトには適用しない)
+2. Vercel(Hobby)にデプロイ。環境変数: `SUPABASE_URL` / `SUPABASE_SERVICE_ROLE_KEY`
+3. `content/sites/<slug>.json` の `line.ctaHref` にLokuで発行した経路リンクを設定
 
-## Learn More
+## 次のスコープ
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+2. 分析→月次レポート生成(LINEサマリー+Web詳細ビュー) / 3. 提案→LINE承認→デプロイ / 4. Loku read合成 / 5. LP健康診断 / 6. タグ版Light

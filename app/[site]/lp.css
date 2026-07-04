@@ -1,0 +1,215 @@
+/* LP秘書 テンプレート基礎スタイル(モバイルファースト)
+   方針: 数字は素のゴシック太字(Noto Sans JP 700/900)、装飾フォント禁止、AI感を出さない */
+
+.lph {
+  background: var(--bg, #fafbfa);
+  color: #1a1a1a;
+  line-height: 1.8;
+  padding-bottom: 84px; /* 追従CTA分の余白 */
+}
+
+.lph h1,
+.lph h2,
+.lph h3 {
+  line-height: 1.4;
+  font-weight: 700;
+}
+
+/* Hero */
+.lph-hero {
+  padding: 72px 24px 48px;
+  text-align: center;
+}
+.lph-hero h1 {
+  font-size: 2rem;
+  font-weight: 900;
+  letter-spacing: 0.04em;
+}
+.lph-sub {
+  margin: 16px auto 28px;
+  max-width: 34em;
+  color: #444;
+}
+.lph-note {
+  margin-top: 16px;
+  font-size: 0.75rem;
+  color: #999;
+}
+
+/* Sections */
+.lph-section {
+  padding: 48px 24px;
+  max-width: 640px;
+  margin: 0 auto;
+}
+.lph-section h2 {
+  font-size: 1.4rem;
+  text-align: center;
+  margin-bottom: 28px;
+}
+
+/* Problem checklist */
+.lph-checks {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  gap: 12px;
+}
+.lph-checks li {
+  background: #fff;
+  border: 1px solid #e8ebe9;
+  border-radius: 10px;
+  padding: 14px 16px 14px 44px;
+  position: relative;
+}
+.lph-checks li::before {
+  content: "✓";
+  position: absolute;
+  left: 16px;
+  color: var(--accent);
+  font-weight: 700;
+}
+.lph-closing {
+  margin-top: 20px;
+  text-align: center;
+  font-weight: 700;
+}
+
+/* Benefit cards */
+.lph-cards {
+  display: grid;
+  gap: 16px;
+}
+.lph-card {
+  background: #fff;
+  border: 1px solid #e8ebe9;
+  border-radius: 12px;
+  padding: 20px;
+}
+.lph-card-num {
+  color: var(--accent);
+  font-weight: 900;
+  font-size: 0.85rem;
+  letter-spacing: 0.1em;
+}
+.lph-card h3 {
+  margin: 6px 0 8px;
+  font-size: 1.05rem;
+}
+.lph-card p {
+  color: #444;
+  font-size: 0.95rem;
+}
+
+/* Pricing */
+.lph-plans {
+  display: grid;
+  gap: 14px;
+}
+.lph-plan {
+  background: #fff;
+  border: 1px solid #e8ebe9;
+  border-radius: 12px;
+  padding: 20px;
+  display: grid;
+  gap: 2px;
+}
+.lph-plan--featured {
+  border: 2px solid var(--accent);
+}
+.lph-plan-name {
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+.lph-plan-per {
+  color: var(--accent);
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+.lph-plan-price {
+  font-weight: 900;
+  font-size: 1.8rem;
+  letter-spacing: 0.02em;
+}
+.lph-plan-note {
+  color: #777;
+  font-size: 0.8rem;
+}
+.lph-risk {
+  list-style: none;
+  padding: 0;
+  margin-top: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+}
+.lph-risk li {
+  background: #eef4f1;
+  color: var(--accent);
+  font-weight: 700;
+  font-size: 0.8rem;
+  border-radius: 999px;
+  padding: 6px 14px;
+}
+
+/* FAQ */
+.lph-faq details {
+  background: #fff;
+  border: 1px solid #e8ebe9;
+  border-radius: 10px;
+  padding: 14px 16px;
+  margin-bottom: 10px;
+}
+.lph-faq summary {
+  font-weight: 700;
+  cursor: pointer;
+}
+.lph-faq p {
+  margin-top: 10px;
+  color: #444;
+  font-size: 0.95rem;
+}
+
+/* CTA */
+.lph-cta-section {
+  text-align: center;
+}
+.lph-btn {
+  display: inline-block;
+  background: var(--accent);
+  color: #fff;
+  font-weight: 700;
+  text-decoration: none;
+  border-radius: 999px;
+  padding: 16px 36px;
+  transition: opacity 0.15s;
+}
+.lph-btn:active {
+  opacity: 0.85;
+}
+
+/* Sticky CTA */
+.lph-sticky {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 12px 16px calc(12px + env(safe-area-inset-bottom));
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(8px);
+  border-top: 1px solid #e8ebe9;
+  text-align: center;
+  z-index: 50;
+}
+.lph-btn--sticky {
+  display: block;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+@media (min-width: 640px) {
+  .lph-hero h1 {
+    font-size: 2.6rem;
+  }
+}

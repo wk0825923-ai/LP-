@@ -1,7 +1,10 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  // ホームディレクトリに別のpackage-lock.jsonがあるためルートを明示
+  turbopack: {
+    root: __dirname,
+  },
 };
 
 export default nextConfig;
