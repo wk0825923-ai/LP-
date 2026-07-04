@@ -105,7 +105,7 @@ export async function POST(req: Request) {
       id,
       url: approveUrl,
       model: proposal.model,
-      nextVersion: proposal.nextVersion,
+      nextVersion,
       changes: proposal.changes,
       sent,
     });
