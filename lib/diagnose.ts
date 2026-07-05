@@ -6,6 +6,7 @@
 
 import Anthropic from "@anthropic-ai/sdk";
 import { env } from "./env";
+import { playbookPreamble } from "./playbook";
 
 export type CheckStatus = "good" | "warn" | "bad";
 
@@ -374,6 +375,7 @@ async function llmReview(
       model: "claude-haiku-4-5-20251001",
       max_tokens: 600,
       system:
+        playbookPreamble() +
         "あなたは小規模店舗のLP(ランディングページ)を担当する秘書です。" +
         "診断結果をもとに、店主向けの総評を日本語で2〜3文で書きます。" +
         "専門用語を避け、良い点を1つ認めた上で、最優先で直すべき1点を具体的に示してください。" +

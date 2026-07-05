@@ -6,6 +6,7 @@ import Anthropic from "@anthropic-ai/sdk";
 import type { SiteContent, Section } from "./types";
 import type { SiteStats } from "./stats";
 import { env } from "./env";
+import { playbookPreamble } from "./playbook";
 
 export interface ProposalChange {
   /** 変更対象。例: "hero.headline" / "line.ctaLabel" / "problem.items.0" / "faq.items.1.a" */
@@ -140,6 +141,7 @@ async function llmChanges(
       max_tokens: 4000,
       thinking: { type: "adaptive" },
       system:
+        playbookPreamble() +
         "あなたは小規模店舗のLPを改善する秘書です。計測データを根拠に、LPの文言(コピー)への変更提案を1〜3件作ります。\n" +
         "ルール:\n" +
         "- 変更できるのは文言のみ。価格・色・構造は提案しない\n" +

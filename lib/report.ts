@@ -4,6 +4,7 @@
 import Anthropic from "@anthropic-ai/sdk";
 import type { SiteStats } from "./stats";
 import { env } from "./env";
+import { playbookPreamble } from "./playbook";
 
 export interface GeneratedReport {
   summaryText: string;
@@ -59,6 +60,7 @@ async function llmInsights(s: SiteStats): Promise<string[] | null> {
       model: "claude-sonnet-4-6",
       max_tokens: 2000,
       system:
+        playbookPreamble() +
         "あなたは小規模店舗のLP(ランディングページ)を担当する秘書です。計測データから、店主向けの所見を日本語で3〜5個作ります。" +
         "各所見は1〜2文、専門用語(CVR・ヒートマップ等)を使わず、数字を根拠に、次に何をすべきかが分かる表現にしてください。" +
         "出力は所見のみを1行1個のプレーンテキストで。番号や記号は付けないでください。",
