@@ -1,0 +1,161 @@
+/* LP秘書 スコープ5: LP健康診断 — フォーム & レポート。数字は素のゴシック太字、装飾フォント禁止 */
+
+.lph-diag {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 40px 20px 64px;
+  color: #1a1a1a;
+  background: #fff;
+  line-height: 1.8;
+}
+
+/* --- 入口(フォーム) --- */
+.lph-diag__hero h1 {
+  font-size: 1.6rem;
+  font-weight: 900;
+  margin: 0 0 8px;
+}
+
+.lph-diag__hero p {
+  color: #555;
+  font-size: 0.98rem;
+  margin: 0 0 24px;
+}
+
+.lph-diag__form {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.lph-diag__form input {
+  flex: 1;
+  min-width: 0;
+  padding: 12px 14px;
+  font-size: 1rem;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  outline: none;
+}
+
+.lph-diag__form input:focus {
+  border-color: #1a1a1a;
+}
+
+.lph-diag__form button {
+  padding: 12px 20px;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #fff;
+  background: #06c755; /* LINEグリーン系のアクセント */
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.lph-diag__form button:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.lph-diag__note {
+  color: #999;
+  font-size: 0.8rem;
+}
+
+.lph-diag__error {
+  margin-top: 12px;
+  padding: 10px 14px;
+  color: #b00020;
+  background: #fdecef;
+  border-radius: 8px;
+  font-size: 0.9rem;
+}
+
+.lph-diag__loading {
+  margin-top: 24px;
+  color: #555;
+  font-size: 0.95rem;
+}
+
+/* --- レポート本文(reports/[id]と同系の見た目) --- */
+.lph-diag__report {
+  margin-top: 32px;
+}
+
+.lph-diag h1 {
+  font-size: 1.5rem;
+  font-weight: 900;
+  margin: 0 0 8px;
+  padding-bottom: 12px;
+  border-bottom: 3px solid #1a1a1a;
+}
+
+.lph-diag h2 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin: 40px 0 12px;
+  padding-left: 10px;
+  border-left: 4px solid #1a1a1a;
+}
+
+.lph-diag__report p {
+  margin: 8px 0;
+  color: #444;
+  font-size: 0.95rem;
+}
+
+.lph-diag table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 12px 0;
+  font-size: 0.95rem;
+}
+
+.lph-diag th {
+  text-align: left;
+  font-weight: 500;
+  color: #666;
+  padding: 8px 12px;
+  border-bottom: 2px solid #ddd;
+  background: #fafafa;
+}
+
+.lph-diag td {
+  padding: 10px 12px;
+  border-bottom: 1px solid #eee;
+  vertical-align: top;
+}
+
+/* 総合スコアの表は数字を大きく太く */
+.lph-diag__report table:first-of-type td {
+  font-weight: 900;
+  font-size: 1.4rem;
+  font-variant-numeric: tabular-nums;
+}
+
+/* 判定マーク(○△×)の色分け。診断結果テーブルの2列目 */
+.lph-diag__report table:last-of-type td:nth-child(2) {
+  font-weight: 900;
+  text-align: center;
+  font-size: 1.05rem;
+}
+
+.lph-diag footer {
+  margin-top: 56px;
+  padding-top: 16px;
+  border-top: 1px solid #eee;
+  color: #999;
+  font-size: 0.8rem;
+}
+
+.lph-diag__share {
+  margin-top: 24px;
+  padding: 14px 16px;
+  background: #f5f7fa;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  color: #555;
+  word-break: break-all;
+}
